@@ -1,0 +1,45 @@
+{
+    "sqltools.connections": [
+        {
+            "askForPassword": true,
+            "connectionTimeout": 30,
+            "driver": "MySQL",
+            "name": "LocalHost",
+            "port": 33060,
+            "server": "127.0.0.1",
+            "username": "merciof",
+            "mysqlOptions": {
+                "authProtocol": "xprotocol"
+            }
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "sql408.main-hosting.eu",
+            "port": 3306,
+            "askForPassword": true,
+            "driver": "MySQL",
+            "database": "u477233099_teste_db_2",
+            "username": "u477233099_merciof_2",
+            "name": "con1"
+        },
+        {
+            "pgOptions": {
+                "ssl": {
+                    "rejectUnauthorized": false,
+                    "requestCert": false
+                }
+            },
+            "previewLimit": 50,
+            "server": "ec2-54-204-37-92.compute-1.amazonaws.com",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "database": "d7vradn92g72o0",
+            "username": "rnjbzitbqkhoih",
+            "password": "6938fa3980b5b62d9925fefd45c23df1c7709467780b55045840388c1893a0ef",
+            "name": "seborural"
+        }
+    ]
+}

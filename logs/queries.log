@@ -1,0 +1,72 @@
+2021-06-12 00:40:28 Debug: duration=255 rows=0 SELECT DISTINCT table_schema AS schema,
+            column_name AS name,
+            data_type AS type,
+            is_nullable AS null, column_default AS default,
+            character_maximum_length AS char_length,
+            c.collation_name,
+            d.description as comment,
+            ordinal_position,
+            c.numeric_precision as column_precision,
+            c.numeric_scale as column_scale,
+            pg_get_serial_sequence(attr.attrelid::regclass::text, attr.attname) IS NOT NULL AS has_serial
+        FROM information_schema.columns c
+        INNER JOIN pg_catalog.pg_namespace ns ON (ns.nspname = table_schema)
+        INNER JOIN pg_catalog.pg_class cl ON (cl.relnamespace = ns.oid AND cl.relname = table_name)
+        LEFT JOIN pg_catalog.pg_index i ON (i.indrelid = cl.oid AND i.indkey[0] = c.ordinal_position)
+        LEFT JOIN pg_catalog.pg_description d on (cl.oid = d.objoid AND d.objsubid = c.ordinal_position)
+        LEFT JOIN pg_catalog.pg_attribute attr ON (cl.oid = attr.attrelid AND column_name = attr.attname)
+        WHERE table_name = 'books' AND table_schema = 'public' AND table_catalog = 'd7vradn92g72o0'
+        ORDER BY ordinal_position
+2021-06-12 00:45:24 Debug: duration=234 rows=2 SELECT DISTINCT table_schema AS schema,
+            column_name AS name,
+            data_type AS type,
+            is_nullable AS null, column_default AS default,
+            character_maximum_length AS char_length,
+            c.collation_name,
+            d.description as comment,
+            ordinal_position,
+            c.numeric_precision as column_precision,
+            c.numeric_scale as column_scale,
+            pg_get_serial_sequence(attr.attrelid::regclass::text, attr.attname) IS NOT NULL AS has_serial
+        FROM information_schema.columns c
+        INNER JOIN pg_catalog.pg_namespace ns ON (ns.nspname = table_schema)
+        INNER JOIN pg_catalog.pg_class cl ON (cl.relnamespace = ns.oid AND cl.relname = table_name)
+        LEFT JOIN pg_catalog.pg_index i ON (i.indrelid = cl.oid AND i.indkey[0] = c.ordinal_position)
+        LEFT JOIN pg_catalog.pg_description d on (cl.oid = d.objoid AND d.objsubid = c.ordinal_position)
+        LEFT JOIN pg_catalog.pg_attribute attr ON (cl.oid = attr.attrelid AND column_name = attr.attname)
+        WHERE table_name = 'courses' AND table_schema = 'public' AND table_catalog = 'd7vradn92g72o0'
+        ORDER BY ordinal_position
+2021-06-12 00:45:24 Debug: duration=210 rows=1 SELECT
+        c2.relname,
+        a.attname,
+        i.indisprimary,
+        i.indisunique
+        FROM pg_catalog.pg_namespace n
+        INNER JOIN pg_catalog.pg_class c ON (n.oid = c.relnamespace)
+        INNER JOIN pg_catalog.pg_index i ON (c.oid = i.indrelid)
+        INNER JOIN pg_catalog.pg_class c2 ON (c2.oid = i.indexrelid)
+        INNER JOIN pg_catalog.pg_attribute a ON (a.attrelid = c.oid AND i.indrelid::regclass = a.attrelid::regclass)
+        WHERE n.nspname = 'public'
+        AND a.attnum = ANY(i.indkey)
+        AND c.relname = 'courses'
+        ORDER BY i.indisprimary DESC, i.indisunique DESC, c.relname, a.attnum
+2021-06-12 00:45:24 Debug: duration=208 rows=0 SELECT
+        c.conname AS name,
+        c.contype AS type,
+        a.attname AS column_name,
+        c.confmatchtype AS match_type,
+        c.confupdtype AS on_update,
+        c.confdeltype AS on_delete,
+        c.confrelid::regclass AS references_table,
+        ab.attname AS references_field
+        FROM pg_catalog.pg_namespace n
+        INNER JOIN pg_catalog.pg_class cl ON (n.oid = cl.relnamespace)
+        INNER JOIN pg_catalog.pg_constraint c ON (n.oid = c.connamespace)
+        INNER JOIN pg_catalog.pg_attribute a ON (a.attrelid = cl.oid AND c.conrelid = a.attrelid AND a.attnum = ANY(c.conkey))
+        INNER JOIN pg_catalog.pg_attribute ab ON (a.attrelid = cl.oid AND c.confrelid = ab.attrelid AND ab.attnum = ANY(c.confkey))
+        WHERE n.nspname = 'public'
+        AND cl.relname = 'courses'
+        ORDER BY name, a.attnum, ab.attnum DESC
+2021-06-12 00:46:17 Debug: duration=222 rows=23 SELECT Courses.id AS "Courses__id", Courses.nome AS "Courses__nome" FROM courses Courses
+2021-06-12 00:46:34 Debug: duration=218 rows=23 SELECT Courses.id AS "Courses__id", Courses.nome AS "Courses__nome" FROM courses Courses
+2021-06-12 00:46:56 Debug: duration=213 rows=23 SELECT Courses.id AS "Courses__id", Courses.nome AS "Courses__nome" FROM courses Courses
